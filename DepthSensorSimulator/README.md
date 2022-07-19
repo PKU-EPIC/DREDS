@@ -1,1 +1,1 @@
-# Domain Randomization-Enhanced Depth Simulator 
+# Domain Randomization-Enhanced Depth Sensor Simulator 
