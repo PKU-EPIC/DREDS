@@ -19,15 +19,15 @@ This repository provides:
 ## Dataset
 <!-- Please download the compressed files and store them from  -->
 ### DREDS dataset (simulated)
-- [**DREDS-CatKnown**](https://mirrors.pku.edu.cn): 100,200 training and 19,380 testing RGBD images made of 1,801 objects spanning 7 categories from ShapeNetCore, with randomized specular, transparent, and diffuse materials.
-- [**DREDS-CatNovel**](https://mirrors.pku.edu.cn): 11,520 images of 60 category-novel objects, which is transformed from GraspNet-1Billion that contains CAD models and annotates poses, by changing their object materials to specular or transparent, to verify the ability to generalize to new object categories.
+- [**DREDS-CatKnown**](https://mirrors.pku.edu.cn/dl_release/DREDS_ECCV2022/data/DREDS-CatKnown/): 100,200 training and 19,380 testing RGBD images made of 1,801 objects spanning 7 categories from ShapeNetCore, with randomized specular, transparent, and diffuse materials.
+- [**DREDS-CatNovel**](https://mirrors.pku.edu.cn/dl_release/DREDS_ECCV2022/data/DREDS-CatNovel/): 11,520 images of 60 category-novel objects, which is transformed from GraspNet-1Billion that contains CAD models and annotates poses, by changing their object materials to specular or transparent, to verify the ability to generalize to new object categories.
 
 ### STD dataset (real)
-- [**STD-CatKnown**](https://mirrors.pku.edu.cn): 27000 RGBD images of 42 category-level objects spanning 7 categories, captured from 25 different scenes with various backgrounds and illumination.
-- [**STD-CatNovel**](https://mirrors.pku.edu.cn): 11000 data of 8 category-novel objects from 5 scenes.
+- [**STD-CatKnown**](https://mirrors.pku.edu.cn/dl_release/DREDS_ECCV2022/data/STD-CatKnown/): 27000 RGBD images of 42 category-level objects spanning 7 categories, captured from 25 different scenes with various backgrounds and illumination.
+- [**STD-CatNovel**](https://mirrors.pku.edu.cn/dl_release/DREDS_ECCV2022/data/STD-CatNovel/): 11000 data of 8 category-novel objects from 5 scenes.
 
 ### CAD models
-We provide the [**CAD models**](https://mirrors.pku.edu.cn) of our DREDS and STD dataset, including: 1,801 DREDS-CatKnown (syn_train & syn_test), 42 STD-CatKnown (real_cat_known), and 8 STD-CatNovel (real_cat_known).
+We provide the [**CAD models**](https://mirrors.pku.edu.cn/dl_release/DREDS_ECCV2022/data/cad_model/) of our DREDS and STD dataset, including: 1,801 of DREDS-CatKnown (syn_train & syn_test), 42 of STD-CatKnown (real_cat_known), and 8 of STD-CatNovel (real_cat_known).
 
 NOTE: The data is only for non-commercial use.
 
@@ -45,4 +45,4 @@ If you find our work useful in your research, please consider citing:
 ## Contact
 If you have any questions, please open a github issue or contact us:
 
-Qiyu Dai: qiyudai@pku.edu.cn, Jiyao Zhang: zhangjiyao@stu.xjtu.edu.cn 
+Qiyu Dai: qiyudai@pku.edu.cn, Jiyao Zhang: zhangjiyao@stu.xjtu.edu.cn
