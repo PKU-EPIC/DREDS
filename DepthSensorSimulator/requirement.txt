@@ -1,4 +1,3 @@
-torch
 pillow
 matplotlib
 kornia

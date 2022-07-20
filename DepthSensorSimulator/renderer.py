@@ -1372,9 +1372,9 @@ g_synset_name_label_pairs = {'aeroplane': 7,
                              'mug': 6,    
                              'other': 0}   
 
-material_class_instance_pairs = {'specular': ['metal', 'porcelain'],
+material_class_instance_pairs = {'specular': ['metal', 'porcelain','plasticsp','paintsp'], # ['metal', 'porcelain'],
                                  'transparent': ['glass'],
-                                 'diffuse': ['plastic', 'rubber'],
+                                 'diffuse': ['plastic','rubber','paper','leather','wood','clay','fabric'], # ['plastic', 'rubber'],
                                  'background': ['background']}
 
 class_material_pairs = {'specular': ['bottle', 'bowl', 'can', 'mug', 'aeroplane', 'car', 'other'],
