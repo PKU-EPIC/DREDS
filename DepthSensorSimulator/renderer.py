@@ -17,25 +17,21 @@ argv = argv[argv.index("--") + 1:]  # get all args after "--"
 RENDERING_PATH = os.getcwd()
 SCENE_NUM = argv[0] if len(argv) > 0 else 0
 
+
 ###########################
 # Parameter setting
 ###########################
 working_root = "/data/sensor/renderer/DepthSensorSimulator"
-CAD_model_root_path = os.path.join(working_root, "train")
-env_map_path = os.path.join(working_root, "envmap_lib")
-default_background_texture_path = os.path.join(working_root, "texture/texture_0.jpg")
-output_root_path = os.path.join(working_root, "rendered_output2")
+CAD_model_root_path = os.path.join(working_root, "cad_model")                           # CAD model path
+env_map_path = os.path.join(working_root, "envmap_lib")                                 # envirment map path
+output_root_path = os.path.join(working_root, "rendered_output")                        # rendered output path
+DEVICE_LIST = [0]                                                                       # GPU id
 
-LIGHT_EMITTER_ENERGY = 5
-LIGHT_ENV_MAP_ENERGY_IR = 0.035
-LIGHT_ENV_MAP_ENERGY_RGB = 0.5
-DEVICE_LIST = [0]
-
-# render mode
+# rendered output setting (0: no output, 1: output)
 render_mode_list = {'RGB': 1,
                     'IR': 1,
                     'NOCS': 1,
-                    'Mask': 1, 
+                    'Mask': 1,  
                     'Normal': 1}
 
 # material randomization mode (transparent, specular, mixed, raw)
@@ -47,15 +43,16 @@ camera_height = 720
 camera_fov = 71.28 / 180 * math.pi
 baseline_distance = 0.055
 num_frame_per_scene = 30    # number of cameras per scene
-
+LIGHT_EMITTER_ENERGY = 5
+LIGHT_ENV_MAP_ENERGY_IR = 0.035
+LIGHT_ENV_MAP_ENERGY_RGB = 0.5
 
 # set background parameter
 background_size = 3.
 background_position = (0., 0., 0.)
 background_scale = (1., 1., 1.)
 
-
-# set camera randomize paramater
+# set camera randomized paramater
 # start_point_range: (range_r, range_vector),   range_r: (r_min, r_max),    range_vector: (x_min, x_max, y_min, y_max)
 # look_at_range: (x_min, x_max, y_min, y_max, z_min, z_max)
 # up_range: (x_min, x_max, y_min, y_max)
@@ -137,6 +134,7 @@ g_shape_synset_name_pairs_all = {'02691156': 'aeroplane',
                                 '04468005': 'train',
                                 '04530566': 'washing_machine',
                                 '04554684': 'dishwasher'}  # washer, use view distribution of dishwasher
+
 
 ###########################
 # Utils
@@ -1128,7 +1126,7 @@ class BlenderRenderer(object):
         node_tree.links.new(node_2.inputs[0], node_3.outputs[0])
 
         # add texture image
-        node_3.image = bpy.data.images.load(filepath=default_background_texture_path)
+        node_3.image = bpy.data.images.load(filepath=os.path.join(working_root, "texture/texture_0.jpg"))
         self.my_material['default_background'] = material_background
 
         # add background plane
