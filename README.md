@@ -11,23 +11,23 @@ For more information, please visit our [**project page**](https://pku-epic.githu
 
 ## Overview
 This repository provides:
+- [Dataset: DREDS (simulated), STD (real)](https://github.com/PKU-EPIC/DREDS#dataset)
 - Blender-python code and asset of [Domain randomization-enhanced depth sensor simulator](https://github.com/PKU-EPIC/DREDS/blob/main/DepthSensorSimulator)
 - PyTorch code and weights of [Depth restoration network SwinDRNet](https://github.com/PKU-EPIC/DREDS/blob/main/SwinDRNet)
 - PyTorch code and weights of SwinDRNet baseline for category-level pose estimation <!-- - PyTorch code and weights of [SwinDRNet baseline for category-level pose estimation](https://github.com/PKU-EPIC/DREDS/blob/main/DownstreamTasks) -->
-- [The simulated DREDS dataset, and real STD dataset](https://github.com/PKU-EPIC/DREDS#dataset)
 
 ## Dataset
 <!-- Please download the compressed files and store them from  -->
 ### DREDS dataset (simulated)
-- [**DREDS-CatKnown**](https://mirrors.pku.edu.cn/dl_release/DREDS_ECCV2022/data/DREDS-CatKnown/): 100,200 training and 19,380 testing RGBD images made of 1,801 objects spanning 7 categories from ShapeNetCore, with randomized specular, transparent, and diffuse materials.
-- [**DREDS-CatNovel**](https://mirrors.pku.edu.cn/dl_release/DREDS_ECCV2022/data/DREDS-CatNovel/): 11,520 images of 60 category-novel objects, which is transformed from GraspNet-1Billion that contains CAD models and annotates poses, by changing their object materials to specular or transparent, to verify the ability to generalize to new object categories.
+- [**DREDS-CatKnown**](https://mirrors.pku.edu.cn/dl-release/DREDS_ECCV2022/data/DREDS-CatKnown/): 100,200 training and 19,380 testing RGBD images made of 1,801 objects spanning 7 categories from ShapeNetCore, with randomized specular, transparent, and diffuse materials.
+- [**DREDS-CatNovel**](https://mirrors.pku.edu.cn/dl-release/DREDS_ECCV2022/data/DREDS-CatNovel/): 11,520 images of 60 category-novel objects, which is transformed from GraspNet-1Billion that contains CAD models and annotates poses, by changing their object materials to specular or transparent, to verify the ability to generalize to new object categories.
 
 ### STD dataset (real)
-- [**STD-CatKnown**](https://mirrors.pku.edu.cn/dl_release/DREDS_ECCV2022/data/STD-CatKnown/): 27000 RGBD images of 42 category-level objects spanning 7 categories, captured from 25 different scenes with various backgrounds and illumination.
-- [**STD-CatNovel**](https://mirrors.pku.edu.cn/dl_release/DREDS_ECCV2022/data/STD-CatNovel/): 11000 data of 8 category-novel objects from 5 scenes.
+- [**STD-CatKnown**](https://mirrors.pku.edu.cn/dl-release/DREDS_ECCV2022/data/STD-CatKnown/): 27000 RGBD images of 42 category-level objects spanning 7 categories, captured from 25 different scenes with various backgrounds and illumination.
+- [**STD-CatNovel**](https://mirrors.pku.edu.cn/dl-release/DREDS_ECCV2022/data/STD-CatNovel/): 11000 data of 8 category-novel objects from 5 scenes.
 
 ### CAD models
-We provide the [**CAD models**](https://mirrors.pku.edu.cn/dl_release/DREDS_ECCV2022/data/cad_model/) of our DREDS and STD dataset, including: 1,801 of DREDS-CatKnown (syn_train & syn_test), 42 of STD-CatKnown (real_cat_known), and 8 of STD-CatNovel (real_cat_known).
+We provide the [**CAD models**](https://mirrors.pku.edu.cn/dl-release/DREDS_ECCV2022/data/cad_model/) of our DREDS and STD dataset, including: 1,801 of DREDS-CatKnown (syn_train & syn_test), 42 of STD-CatKnown (real_cat_known), and 8 of STD-CatNovel (real_cat_known).
 
 NOTE: The data is only for non-commercial use.
 
