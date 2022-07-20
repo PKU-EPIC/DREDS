@@ -1,10 +1,12 @@
 # Domain Randomization-Enhanced Depth Sensor Simulator 
 ![teaser](teaser_dreds.png)
+This is the official implementation of Domain Randomization-Enhanced Depth Sensor Simulation (DREDS) pipeline. We simulate an active stereo depth system using physics-based rendering and generate a large-scale synthetic data that contains photorealistic RGB images along with their simulated depths carrying realistic sensor noises. To facilitate generalization, we further adopt domain randomization techniques that randomize the object textures, object materials (from specular, transparent, to diffuse), object layout, floor textures, illuminations along camera poses. Experiments demonstrate that the data generated from this pipeline bridges the sim-to-real domain gap, and significantly improves the generalization ability on depth restoration and the downstream tasks.
 
 ## Installation
-### IR rendering (Blender)
+### IR rendering (Blender-python)
 - Download [Blender 2.93.3 (Linux x64)](https://download.blender.org/release/Blender2.93/blender-2.93.3-linux-x64.tar.xz) compressed file and uncompress.
-- Download the [environment map asset](https://mirrors.pku.edu.cn/dl-release/DREDS_ECCV2022/simulator/envmap_lib.tar.gz) and the [blend file](https://mirrors.pku.edu.cn/dl-release/DREDS_ECCV2022/simulator/material_lib_v2.blend).
+- Download the [environment map asset](https://mirrors.pku.edu.cn/dl-release/DREDS_ECCV2022/simulator/envmap_lib.tar.gz) and the [CAD model](https://mirrors.pku.edu.cn/dl-release/DREDS_ECCV2022/data/cad_model/). Please follow the [file structure](https://github.com/PKU-EPIC/DREDS/tree/main/DepthSensorSimulator#file-structure).
+- Download the [blend file](https://mirrors.pku.edu.cn/dl-release/DREDS_ECCV2022/simulator/material_lib_v2.blend).
 - Install the Python packages (Numpy, etc.) into the Blender built-in Python environment. 
 ```
 cd /home/YourUserName/blender-2.93.3-linux-x64/2.93/python/bin
@@ -13,7 +15,7 @@ cd /home/YourUserName/blender-2.93.3-linux-x64/2.93/python/bin
 ./python3.9 -m pip install numpy --user
 ```
 
-### Stereo matching
+### Stereo matching (PyTorch)
 - Create a new Anaconda virtual environment
 ```
 conda create --name DepthSensorSimulator python=3.9
@@ -32,7 +34,7 @@ bash run_renderer.sh
 ```
 The rendered results would be saved in ./rendered_output.
 - Run the stereo matching code for left and right IR images to get the simulated depth map.
-```bash 
+``` 
 python stereo_matching.py
 ```
 The simulated depths would also be saved in ./rendered_output. See [File Structure](https://github.com/PKU-EPIC/DREDS/tree/main/DepthSensorSimulator#file-structure)
