@@ -1,6 +1,6 @@
 # Domain Randomization-Enhanced Depth Sensor Simulator 
 ![teaser](teaser_dreds.png)
-This is the official implementation of Domain Randomization-Enhanced Depth Sensor Simulation (DREDS) pipeline. We simulate an active stereo depth system using physics-based rendering and generate a large-scale synthetic data that contains photorealistic RGB images along with their simulated depths carrying realistic sensor noises. To facilitate generalization, we further adopt domain randomization techniques that randomize the object textures, object materials (from specular, transparent, to diffuse), object layout, floor textures, illuminations along camera poses. Experiments demonstrate that the data generated from this pipeline bridges the sim-to-real domain gap, and significantly improves the generalization ability on depth restoration and the downstream tasks.
+This is the official implementation of **Domain Randomization-Enhanced Depth Sensor Simulation (DREDS)** pipeline. We simulate an active stereo depth system (**RealSense D415**) using physics-based rendering and generate a large-scale synthetic data that contains **photorealistic RGB images along with their simulated depths carrying realistic sensor noises**. To facilitate generalization, we further adopt domain randomization techniques that randomize the object textures, object materials (from specular, transparent, to diffuse), object layout, floor textures, illuminations along camera poses. Experiments demonstrate that the data generated from this pipeline bridges the sim-to-real domain gap, and significantly improves the generalization ability on depth restoration and the downstream tasks.
 
 ## Installation
 ### IR rendering (Blender-python)
@@ -60,7 +60,7 @@ Depth Sensor Simulator
 │   │   ├── 0000_ir_l.png                       # left IR images
 │   │   ├── 0000_ir_r.png                       # right IR images
 │   │   ├── 0000_mask.exr                       
-│   │   ├── 0000_meta.txt                       # 
+│   │   ├── 0000_meta.txt                       # [instance id, category label, category name, instance name, object scale, material label]
 │   │   ├── 0000_normal.exr                    
 │   │   ├── 0000_simDepthImage.exr              # simulated depth calculated from the stereo IR images
 │   │   └── ...

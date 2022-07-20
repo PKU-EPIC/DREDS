@@ -46,4 +46,4 @@ If you find our work useful in your research, please consider citing:
 ## Contact
 If you have any questions, please open a github issue or contact us:
 
-Qiyu Dai: qiyudai@pku.edu.cn, Jiyao Zhang: zhangjiyao@stu.xjtu.edu.cn
+Qiyu Dai: qiyudai@pku.edu.cn, Jiyao Zhang: zhangjiyao@stu.xjtu.edu.cn, Qiwei Li: lqw@pku.edu.cn
