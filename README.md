@@ -2,7 +2,8 @@
 
 This is the official repository of [**Domain Randomization-Enhanced Depth Simulation and Restoration for Perceiving and Grasping Specular and Transparent Objects**](https://arxiv.org).
 
-For more information, please visit our **project page** #[**project page**](https://pku-epic.github.io/DREDS/).
+For more information, please visit our **project page** 
+<!-- [**project page**](https://pku-epic.github.io/DREDS/). -->
 
 ## Introduction
 ![teaser](images/teaser.png)
