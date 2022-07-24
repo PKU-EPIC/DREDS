@@ -139,6 +139,7 @@ input_only = [
     "mul-element", "guas-noise", "lap-noise", "dropout", "cdropout"
 ]
 
+
 def load_meta(file_path):
     with open(file_path, "r") as f:  # 打开文件
         data = f.readlines()  # 读取文件
@@ -146,16 +147,27 @@ def load_meta(file_path):
     for line in data:
         words = line.split(" ")
         instance = {}
-        instance["index"] = int(words[0])
-        instance["label"] = int(words[1])
-        instance["instance_folder"] = words[2]
-        instance["name"] = words[3]
-        instance["scale"] = float(words[4])
-        instance["material"] = int(words[5])
-        instance["quaternion"] = np.array([float(words[6]), float(words[7]), float(words[8]), float(words[9])])
-        instance["translation"] = np.array([float(words[10]), float(words[11]), float(words[12])])
+        if len(words) > 5:
+            instance["index"] = int(words[0])
+            instance["label"] = int(words[1])
+            instance["instance_folder"] = words[2]
+            instance["name"] = words[3]
+            instance["scale"] = float(words[4])
+            instance["material"] = int(words[5])
+            instance["quaternion"] = np.array([float(words[6]), float(words[7]), float(words[8]), float(words[9])])
+            instance["translation"] = np.array([float(words[10]), float(words[11]), float(words[12])])
+        else:
+            instance["index"] = int(words[0])
+            instance["label"] = int(words[1])
+            instance["instance_folder"] = -1
+            instance["name"] = -1
+            instance["scale"] = -1
+            instance["material"] = int(words[2])
+            instance["quaternion"] = np.array([0., 0., 0., 0.])
+            instance["translation"] = np.array([0., 0., 0.])
         meta.append(instance)
-    while len(meta) < 10:
+        
+    while len(meta) < 30:
         instance = {}
         instance["index"] = -1
         instance["label"] = -1
@@ -215,7 +227,7 @@ class SwinDRNetDataset(Dataset):
 
         self._extension_rgb = ['_color.png']
         self._extension_sim_depth = ['_simDepthImage.exr', '_depth_415.exr']  # The file extension of input images
-        self._extension_syn_depth = ['_depth_120.exr', '_gt_depth.exr']
+        self._extension_syn_depth = ['_depth_120.exr', '_gt_depth.exr', '_depth_0.exr']
         self._extension_nocs = ['_coord.png']
         self._extension_mask = ['_mask.exr', '_mask.png']
         self._extension_meta = ['_meta.txt']
@@ -464,6 +476,13 @@ class SwinDRNetDataset(Dataset):
             self._datalist_nocs = self._datalist_nocs + nocs_paths
 
         num_nocs = len(self._datalist_nocs)
+
+        if num_nocs == 0:
+            nocs_search_str = os.path.join(nocs_dir, '*/*' + '_color.png')
+            nocs_paths = sorted(glob.glob(nocs_search_str))
+            self._datalist_nocs = self._datalist_nocs + nocs_paths
+        num_nocs = len(self._datalist_nocs)    
+        
         if num_nocs == 0:
             raise ValueError('No nocs images found in given directory. Searched for {}'.format(nocs_search_str))
         if num_nocs != num_rgb:
