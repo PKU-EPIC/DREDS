@@ -3,7 +3,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 import warnings
 
-
 def resize(input,
            size=None,
            scale_factor=None,

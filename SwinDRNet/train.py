@@ -9,7 +9,6 @@ from networks.SwinDRNet import SwinDRNet
 from trainer import SwinDRNetTrainer
 from config import get_config
 
-
 parser = argparse.ArgumentParser()
 parser.add_argument('--mask_transparent', action='store_true', default=True, help='material mask')
 parser.add_argument('--mask_specular', action='store_true', default=True, help='material mask')

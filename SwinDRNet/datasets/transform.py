@@ -888,6 +888,7 @@ class Normalize(object):
             mean=self.mean, std=self.std, to_rgb=self.to_rgb)
         return results
 
+
     def __repr__(self):
         repr_str = self.__class__.__name__
         repr_str += f'(mean={self.mean}, std={self.std}, to_rgb=' \

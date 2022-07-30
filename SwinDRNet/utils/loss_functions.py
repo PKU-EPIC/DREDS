@@ -7,7 +7,6 @@ import torch
 import torch.nn as nn
 import numpy as np
 import torch.nn.functional as F
-
 from termcolor import colored
 from torch.nn.modules import loss
 

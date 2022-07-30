@@ -1,7 +1,6 @@
 '''Misc functions like functions for reading and saving EXR images using OpenEXR, saving pointclouds, etc.
 '''
 import struct
-
 import numpy as np
 import cv2
 import Imath

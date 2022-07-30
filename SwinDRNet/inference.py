@@ -38,6 +38,7 @@ parser.add_argument('--val_data_type', type=str,
 # parser.add_argument('--val_data_type', type=str,
 #                     default='real', help='type of val dataset')
 
+
 parser.add_argument('--output_dir', type=str, 
                     default='results/DREDS_CatKnown', help='output dir')
 parser.add_argument('--checkpoint_save_path', type=str, 

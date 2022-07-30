@@ -27,7 +27,6 @@ import matplotlib.pyplot as plt
 import time
 import copy
 
-
 def depth_to_xyz(depthImage, fx, fy, scale_h=1., scale_w=1.):
     # input depth image[B, 1, H, W]
     # output xyz image[B, 3, H, W]

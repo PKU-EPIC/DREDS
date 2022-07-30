@@ -3,7 +3,6 @@ import torch
 import cv2
 import torch.nn.functional as F
 
-
 def get_metrics_depth_restoration_train(gt, pred, width, height, seg_mask=None):
 
     gt = gt.detach().permute(0, 2, 3, 1).cpu().numpy().astype("float32")

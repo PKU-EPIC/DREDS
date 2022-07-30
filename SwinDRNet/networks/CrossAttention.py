@@ -7,7 +7,6 @@ from timm.models.layers import DropPath, to_2tuple, trunc_normal_
 import numpy as np
 
 # from swin_transformer import window_partition, window_reverse
-
 class Mlp(nn.Module):
     """ Multilayer perceptron."""
 

@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def intersect_and_union(pred_label,
                         label,
                         num_classes,
