@@ -16,14 +16,14 @@ parser.add_argument('--mask_specular', action='store_true', default=True, help='
 parser.add_argument('--mask_diffuse', action='store_true', default=True, help='material mask')
 
 parser.add_argument('--train_data_path', type=str,
-                    default='/data/sensor/data/shapenet_generate_1216/train', help='root dir for training dataset')
+                    default='/data/DREDS/DREDS-CatKnown/train', help='root dir for training dataset')
 parser.add_argument('--val_data_path', type=str,
-                    default='/data/sensor/data/shapenet_generate_1216_val_novel', help='root dir for validation dataset')
+                    default='/data/DREDS/DREDS-CatKnown/val', help='root dir for validation dataset')
 parser.add_argument('--val_data_type', type=str,
                     default='sim', help='type of val dataset (real/sim)')
-
 parser.add_argument('--output_dir', type=str, 
                     default='results', help='output dir')
+
 parser.add_argument('--decode_mode', type=str, 
                     default='multi_head', help='Select encode mode')
 parser.add_argument('--checkpoint_save_path', type=str, 

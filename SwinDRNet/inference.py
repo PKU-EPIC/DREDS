@@ -16,48 +16,36 @@ parser.add_argument('--mask_specular', action='store_true', default=True, help='
 parser.add_argument('--mask_diffuse', action='store_true', default=True, help='material mask')
 
 parser.add_argument('--train_data_path', type=str,
-                    default='/data/sensor/data/shapenet_generate_1216/train', help='root dir for training dataset')
-
-# parser.add_argument('--val_data_path', type=str,
-#                     default='/data/sensor/data/shapenet_generate_1216_val_novel', help='root dir for validation dataset')
-# parser.add_argument('--val_data_type', type=str,
-#                     default='sim', help='type of val dataset (real/sim)')
-
-# parser.add_argument('--val_data_path', type=str,
-#                     default='/data/sensor/data/graspnet_generate_test_catnovel_0202', help='root dir for data')
-# parser.add_argument('--val_data_type', type=str,
-#                     default='sim', help='type of val dataset')
-
-# parser.add_argument('--val_data_path', type=str,
-#                     default='/data/sensor/data/shapenet_generate_1216_val_novel', help='root dir for data')
-# parser.add_argument('--val_data_type', type=str,
-#                     default='sim', help='type of val dataset')
+                    default='/data/DREDS/DREDS-CatKnown/train', help='root dir for training dataset')
 
 parser.add_argument('--val_data_path', type=str,
-                    default='/data/sensor/data/real_data', help='root dir for data')
+                    default='/data/DREDS/DREDS-CatKnown/test', help='root dir for validation dataset')
 parser.add_argument('--val_data_type', type=str,
-                    default='real', help='type of val dataset')
+                    default='sim', help='type of val dataset (real/sim)')
 
 # parser.add_argument('--val_data_path', type=str,
-#                     default='/data/sensor/data/real_data_novel', help='root dir for data')
+#                     default='/data/DREDS/DREDS-CatNovel', help='root dir for data')
+# parser.add_argument('--val_data_type', type=str,
+#                     default='sim', help='type of val dataset')
+
+# parser.add_argument('--val_data_path', type=str,
+#                     default='/data/STD/STD-CatKnown', help='root dir for data')
+# parser.add_argument('--val_data_type', type=str,
+#                     default='real', help='type of val dataset')
+
+# parser.add_argument('--val_data_path', type=str,
+#                     default='/data/STD/STD-CatNovel', help='root dir for data')
 # parser.add_argument('--val_data_type', type=str,
 #                     default='real', help='type of val dataset')
 
 parser.add_argument('--output_dir', type=str, 
-                    default='results/release_inference_real_spec&trans', help='output dir')
+                    default='results/DREDS_CatKnown', help='output dir')
+parser.add_argument('--checkpoint_save_path', type=str, 
+                    default='models/DREDS', help='Choose a path to save checkpoints')
+
+
 parser.add_argument('--decode_mode', type=str, 
                     default='multi_head', help='Select encode mode')
-parser.add_argument('--checkpoint_save_path', type=str, 
-                    default='models/release_inference_real_spec&trans', help='Choose a path to save checkpoints')
-
-# parser.add_argument('--output_dir', type=str, 
-#                     default='/data/sensor/checkpoints2/log_jiyao/0120/release', help='output dir')
-# parser.add_argument('--decode_mode', type=str, 
-#                     default='multi_head', help='Select encode mode')
-# parser.add_argument('--checkpoint_save_path', type=str, 
-#                     default='/data/sensor/checkpoints2/ckpt_jiyao/0120/relsese', help='Choose a path to save checkpoints')
-
-
 parser.add_argument('--val_interation_interval', type=int, 
                     default=5000, help='The iteration interval to perform validation')
 

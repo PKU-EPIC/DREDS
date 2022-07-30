@@ -15,7 +15,26 @@ $ sudo apt install libopenexr-dev zlib1g-dev openexr
 ```bash
 $ pip install -r requirments.txt
 ```
-2. Prepare dataset
+2. Download dataset and models
+Download the pre-trained model, our model and dataset. In the scripts below, be sure to comment out files you do not want, as they are very large. Alternatively, you can download files [manually](https://mirrors.pku.edu.cn/dl-release/DREDS_ECCV2022/)
+
+```bash
+# Download DREDS and STD Dataset
+$ cd data
+$ bash DOWNLOAD.sh
+$ cd ..
+
+# Download the pretrained model
+$ cd pretrained_model
+$ bash DOWNLOAD.sh
+$ cd ..
+
+# Download our model
+$ cd models
+$ bash DOWNLOAD.sh
+$ cd ..
+```
+
 ### Training
 ```bash
 # An example command for training
