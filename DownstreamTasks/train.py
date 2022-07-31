@@ -16,17 +16,17 @@ parser.add_argument('--mask_specular', action='store_true', default=True, help='
 parser.add_argument('--mask_diffuse', action='store_true', default=True, help='material mask')
 
 parser.add_argument('--train_data_path', type=str,
-                    default='/data/sensor/data/shapenet_generate_1216/train', help='root dir for training dataset')
+                    default='/data/DREDS/DREDS-CatKnown/train', help='root dir for training dataset')
 parser.add_argument('--val_data_path', type=str,
-                    default='/data/sensor/data/shapenet_generate_1216/val', help='root dir for validation dataset')
+                    default='/data/DREDS/DREDS-CatKnown/val', help='root dir for validation dataset')
 parser.add_argument('--val_data_type', type=str,
                     default='sim', help='type of val dataset (real/sim)')
 parser.add_argument('--val_depth_path', type=str,
                         default=None, help='root dir for val depth')
 parser.add_argument('--train_obj_path', type=str,
-                    default='/data/sensor/data/cad_model/syn_train', help='root dir for train obj')
+                    default='/data/cad_model/syn_train', help='root dir for train obj')
 parser.add_argument('--val_obj_path', type=str,
-                    default='/data/sensor/data/cad_model/syn_train', help='root dir for val obj')
+                    default='/data/cad_model/syn_train', help='root dir for val obj')
 parser.add_argument('--output_dir', type=str, 
                     default='results', help='output dir')
 parser.add_argument('--decode_mode', type=str, 
