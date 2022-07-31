@@ -16,18 +16,18 @@ parser.add_argument('--mask_specular', action='store_true', default=True, help='
 parser.add_argument('--mask_diffuse', action='store_true', default=True, help='material mask')
 
 parser.add_argument('--train_data_path', type=str,
-                    default='/data/sensor/data/shapenet_generate_1216/train', help='root dir for training dataset')
+                    default='/data/DREDS/DREDS-CatKnown/train', help='root dir for training dataset')
 parser.add_argument('--train_obj_path', type=str,
-                    default='/data/sensor/data/cad_model/syn_train', help='root dir for obj')
+                    default='/data/cad_model/syn_train', help='root dir for obj')
 
 parser.add_argument('--val_data_path', type=str,
-                    default='/data/sensor/data/shapenet_generate_1216_val_novel', help='root dir for data')
+                    default='/data/DREDS/DREDS-CatKnown/test', help='root dir for data')
 parser.add_argument('--val_data_type', type=str,
                     default='sim', help='type of val dataset')
 parser.add_argument('--val_obj_path', type=str,
-                    default='/data/sensor/data/cad_model/syn_test', help='root dir for obj')
+                    default='/data/cad_model/syn_test', help='root dir for obj')
 parser.add_argument('--val_depth_path', type=str,
-                    default='/data/sensor/data/shapenet_generate_1216_val_novel', help='root dir for depth')
+                    default='/data/DREDS/DREDS-CatKnown/test', help='root dir for depth')
 
 
 
@@ -94,7 +94,7 @@ config = get_config(args)
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "5"
 device_list = [0]
-model_path = "results/ckpt/checkpoint-iter-00000003.pth"
+model_path = "results/ckpt/checkpoint-iter-00150000.pth"
 
 
 if __name__ == "__main__":

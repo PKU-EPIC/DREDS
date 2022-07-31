@@ -74,45 +74,45 @@ class SwinDRNet(nn.Module):
         # self.decode_head_sem_seg = UPerHead(num_classes=self.num_classes, img_size = self.img_size)
         # self.decode_head_coord = UPerHead(num_classes=3, img_size = self.img_size)
  
-        self.decode_head_depth_restoration = UPerHead(num_classes=1, in_channels=[288, 576, 1152, 2304], img_size = self.img_size)
-        self.decode_head_confidence = UPerHead(num_classes=2, in_channels=[288, 576, 1152, 2304], img_size = self.img_size)
-        self.decode_head_sem_seg = UPerHead(num_classes=self.num_classes, in_channels=[288, 576, 1152, 2304],img_size = self.img_size)
-        self.decode_head_coord = UPerHead(num_classes=3, in_channels=[288, 576, 1152, 2304],img_size = self.img_size)
-
-        self.cross_attention_0 = CrossAttention(in_channel=96, depth=1, num_heads=1)
-        self.cross_attention_1 = CrossAttention(in_channel=192, depth=1, num_heads=1)
-        self.cross_attention_2 = CrossAttention(in_channel=384, depth=1, num_heads=1)
-        self.cross_attention_3 = CrossAttention(in_channel=768, depth=1, num_heads=1)
+        self.decode_head_sem_seg = UPerHead(num_classes=self.num_classes, img_size = self.img_size)
+        self.decode_head_coord = UPerHead(num_classes=3, img_size = self.img_size)
+        self.decode_head_depth_restoration = UPerHead(num_classes=1, img_size = self.img_size)
+        self.decode_head_confidence = UPerHead(num_classes=2, img_size = self.img_size)
+        
+        self.cross_attention_0 = CrossAttention(in_channel=96, depth=config.MODEL.SWIN.DEPTHS[0], num_heads=config.MODEL.SWIN.NUM_HEADS[0])
+        self.cross_attention_1 = CrossAttention(in_channel=192, depth=config.MODEL.SWIN.DEPTHS[1], num_heads=config.MODEL.SWIN.NUM_HEADS[1])
+        self.cross_attention_2 = CrossAttention(in_channel=384, depth=config.MODEL.SWIN.DEPTHS[2], num_heads=config.MODEL.SWIN.NUM_HEADS[2])
+        self.cross_attention_3 = CrossAttention(in_channel=768, depth=config.MODEL.SWIN.DEPTHS[3], num_heads=config.MODEL.SWIN.NUM_HEADS[3])
 
         self.softmax = nn.Softmax(dim=1)
 
 
-    def forward(self, rgb, depth):
+    def forward(self, rgb, xyz):
         """Forward function."""
 
         rgb = rgb.repeat(1,3,1,1) if rgb.size()[1] == 1 else rgb       # B, C, H, W
-        depth = depth.repeat(1,3,1,1) if depth.size()[1] == 1 else depth       # B, C, H, W        
+        xyz = xyz.repeat(1,3,1,1) if xyz.size()[1] == 1 else xyz       # B, C, H, W        
         
         # depth = torch.unsqueeze(xyz[:, 2, :, :], 1)
         # depth = depth.repeat(1, 3, 1, 1)
                 
         input_org_shape = rgb.shape[2:]
         rgb_feature = self.backbone_rgb_branch(rgb)
-        depth_feature = self.backbone_xyz_branch(depth)
+        xyz_feature = self.backbone_xyz_branch(xyz)
     
-        shortcut = torch.unsqueeze(depth[:, 2, :, :], 1)
+        shortcut = torch.unsqueeze(xyz[:, 2, :, :], 1)
 
         # fusion
+
         x = []
-        out = self.cross_attention_0(tuple([rgb_feature[0], depth_feature[0]]))       # [B, 96, 56, 56]
-        x.append(torch.cat((out, rgb_feature[0], depth_feature[0]), 1))
-        out = self.cross_attention_1(tuple([rgb_feature[1], depth_feature[1]]))       # [B, 192, 28, 28]
-        x.append(torch.cat((out, rgb_feature[1], depth_feature[1]), 1))
-        out = self.cross_attention_2(tuple([rgb_feature[2], depth_feature[2]]))       # [B, 384, 14, 14]
-        x.append(torch.cat((out, rgb_feature[2], depth_feature[2]), 1))
-        out = self.cross_attention_3(tuple([rgb_feature[3], depth_feature[3]]))       # [B, 768, 7, 7]
-        x.append(torch.cat((out, rgb_feature[3], depth_feature[3]), 1))
-        
+        out = self.cross_attention_0(tuple([rgb_feature[0], xyz_feature[0]]))       # [B, 96, 56, 56]
+        x.append(out)
+        out = self.cross_attention_1(tuple([rgb_feature[1], xyz_feature[1]]))       # [B, 192, 28, 28]
+        x.append(out)
+        out = self.cross_attention_2(tuple([rgb_feature[2], xyz_feature[2]]))       # [B, 384, 14, 14]
+        x.append(out)
+        out = self.cross_attention_3(tuple([rgb_feature[3], xyz_feature[3]]))       # [B, 768, 7, 7]
+        x.append(out)
         # pred_sem_seg = self.decode_head_sem_seg(x, input_org_shape)
         # pred_coord = self.decode_head_coord(x, input_org_shape)
         pred_sem_seg = self.decode_head_sem_seg(x, input_org_shape)

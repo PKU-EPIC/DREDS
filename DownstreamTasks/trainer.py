@@ -598,7 +598,7 @@ class SwinDRNetTrainer():
         ins_without_other_masks = sample_batched['ins_w/o_others_mask']
 
         # pred_ds, pred_ds_initial, confidence_sim_ds, confidence_initial, pred_sem_seg, pred_coords = self.model(rgbs, sim_ds)    # [bs, 150, 512, 512], [bs, 150, 512, 512])
-        pred_sem_seg, pred_coords  = self.model(rgbs, sim_ds)    # [bs, 150, 512, 512], [bs, 150, 512, 512])
+        pred_sem_seg, pred_coords  = self.model(rgbs, sim_xyzs)    # [bs, 150, 512, 512], [bs, 150, 512, 512])
         self.get_loss_sem_seg(sem_masks, pred_sem_seg, mode)
 
         self.mrcnn_coords_symmetry_loss_graph_3(coords, pred_coords, ins_without_other_masks,sem_masks,'Soft_L1', mode)
