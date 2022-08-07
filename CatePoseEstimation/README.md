@@ -13,7 +13,7 @@ $ pip install -r requirments.txt
 ```
 - ### Download dataset and models
 
-1. Download the pre-trained model, and dataset. In the scripts below, be sure to comment out files you do not want, as they are very large. Alternatively, you can download files [manually](https://mirrors.pku.edu.cn/dl-release/DREDS_ECCV2022/)
+1. Download the pre-trained SwinDRNet model and dataset. In the scripts below, be sure to comment out files you do not want, as they are very large. Alternatively, you can download files [manually](https://mirrors.pku.edu.cn/dl-release/DREDS_ECCV2022/)
 
 ```bash
 # Download DREDS and STD Dataset
@@ -27,7 +27,7 @@ $ bash DOWNLOAD.sh
 $ cd ..
 
 ```
-2. Model: We provide our pretrained model on here (will release soon). Please download to /results/ckpt/ .
+2. Model: We provide our pretrained pose estimation model here (will release soon). Please download to /results/ckpt/ .
 3. Extract the downloaded dataset and merge the train split of DREDS-CatKnown following the file structure.
 ```
 data
