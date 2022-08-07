@@ -1,4 +1,4 @@
-# SwinDRNet for Downstream Tasks
+# SwinDRNet for Category-level Pose Estimation
 PyTorch code and weights of SwinDRNet baseline for category-level pose estimation.
 ## System Dependencies
 ```bash
@@ -27,7 +27,7 @@ $ bash DOWNLOAD.sh
 $ cd ..
 
 ```
-2. Model: We provide our trained models on onedrive, link.Download it and move it to /results/ckpt/ .
+2. Model: We provide our pretrained model on here (will release soon). Please download to /results/ckpt/ .
 3. Extract the downloaded dataset and merge the train split of DREDS-CatKnown following the file structure.
 ```
 data
