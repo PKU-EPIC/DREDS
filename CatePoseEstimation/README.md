@@ -27,7 +27,7 @@ $ bash DOWNLOAD.sh
 $ cd ..
 
 ```
-2. Model: We provide our pretrained pose estimation model here (will release soon). Please download to /results/ckpt/ .
+2. Model: We provide our pretrained pose estimation model [here](https://drive.google.com/file/d/1MqUIUhJYLljnoj66mjiyq36VxZHUYQ77/view?usp=sharing) (will release soon). Please download to /results/ckpt/ .
 3. Extract the downloaded dataset and merge the train split of DREDS-CatKnown following the file structure.
 ```
 data
