@@ -1,6 +1,6 @@
 # Domain Randomization-Enhanced Depth Simulation and Restoration for Perceiving and Grasping Specular and Transparent Objects (ECCV 2022)
 
-This is the official repository of [**Domain Randomization-Enhanced Depth Simulation and Restoration for Perceiving and Grasping Specular and Transparent Objects**](https://arxiv.org).
+This is the official repository of [**Domain Randomization-Enhanced Depth Simulation and Restoration for Perceiving and Grasping Specular and Transparent Objects**](http://arxiv.org/abs/2208.03792).
 
 For more information, please visit our [**project page**](https://pku-epic.github.io/DREDS/).
 
