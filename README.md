@@ -14,7 +14,7 @@ This repository provides:
 - [Dataset: DREDS (simulated), STD (real)](https://github.com/PKU-EPIC/DREDS#dataset)
 - Blender-python code and asset of [Domain randomization-enhanced depth sensor simulator](https://github.com/PKU-EPIC/DREDS/blob/main/DepthSensorSimulator)
 - PyTorch code and weights of [Depth restoration network SwinDRNet](https://github.com/PKU-EPIC/DREDS/blob/main/SwinDRNet)
-- PyTorch code and weights of [SwinDRNet baseline for category-level pose estimation](https://github.com/PKU-EPIC/DREDS/blob/main/DownstreamTasks)
+- PyTorch code and weights of [SwinDRNet baseline for category-level pose estimation](https://github.com/PKU-EPIC/DREDS/blob/main/CatePoseEstimation)
 
 ## Dataset
 <!-- Please download the compressed files and store them from  -->
