@@ -100,7 +100,7 @@ config = get_config(args)
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 device_list = [0]
 # model_path = "trained_model/model.pth"
-model_path = "models/model.pth"
+model_path = "models/model.pth"  #common out path error
 
 
 if __name__ == "__main__":
