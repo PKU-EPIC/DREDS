@@ -16,10 +16,10 @@ parser.add_argument('--mask_specular', action='store_true', default=True, help='
 parser.add_argument('--mask_diffuse', action='store_true', default=True, help='material mask')
 
 parser.add_argument('--train_data_path', type=str,
-                    default='/data/DREDS/DREDS-CatKnown/train', help='root dir for training dataset')
+                    default='./data/DREDS/DREDS-CatKnown/train', help='root dir for training dataset')
 
 parser.add_argument('--val_data_path', type=str,
-                    default='/data/DREDS/DREDS-CatKnown/test', help='root dir for validation dataset')
+                    default='./data/DREDS/DREDS-CatKnown/test', help='root dir for validation dataset')
 parser.add_argument('--val_data_type', type=str,
                     default='sim', help='type of val dataset (real/sim)')
 
@@ -99,7 +99,8 @@ config = get_config(args)
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 device_list = [0]
-model_path = "trained_model/model.pth"
+# model_path = "trained_model/model.pth"
+model_path = "models/model.pth"  #common out path error
 
 
 if __name__ == "__main__":
