@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="stong48" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="stong48">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/data/stone/RelativeProject/DREDS" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>
