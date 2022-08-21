@@ -16,7 +16,7 @@ parser.add_argument('--mask_specular', action='store_true', default=True, help='
 parser.add_argument('--mask_diffuse', action='store_true', default=True, help='material mask')
 
 parser.add_argument('--train_data_path', type=str,
-                    default='/data/DREDS/DREDS-CatKnown/train', help='root dir for training dataset')
+                    default='./data/DREDS/DREDS-CatKnown/train', help='root dir for training dataset')
 
 parser.add_argument('--val_data_path', type=str,
                     default='/data/DREDS/DREDS-CatKnown/test', help='root dir for validation dataset')
