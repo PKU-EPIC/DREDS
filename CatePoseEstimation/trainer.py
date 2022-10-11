@@ -1055,91 +1055,6 @@ class SwinDRNetTrainer():
         self.writer.close()
         return "Training Finished!"
 
-    '''
-    def inference(self):
-        #################################### VALIDATION CYCLE ###################################
-        # if self.total_iter_num != 0 and self.total_iter_num % self.val_interation_interval == 0:
-        print('\nValidation:')
-        print('=' * 10)
-        for i, batch in enumerate(tqdm(self.val_loader)):
-            self.model.eval()
-            sample_batched = self.transfer_to_device(batch)
-            rgbs = sample_batched['rgb']
-            sim_xyzs = sample_batched['sim_xyz']
-            sim_ds = sample_batched['sim_depth']
-            syn_ds = sample_batched['syn_depth']
-            coords = sample_batched['nocs_map']
-            sem_masks = sample_batched['sem_mask']
-            ins_masks = sample_batched['ins_mask']
-            ins_without_other_masks = sample_batched['ins_w/o_others_mask']
-
-            with torch.no_grad():
-                # outputs_depth, normal_labels, normal_pred, confidence_sim_ds, confidence_initial, \
-                #     pred_sem_seg, pred_coord = self.forward(sample_batched, mode='val')
-                start_time = time.time()
-                outputs_depth, normal_labels, normal_pred, confidence_sim_ds, confidence_initial = self.forward(sample_batched, mode='val')
-                end_time = time.time()
-                print((end_time - start_time) / self.batch_size)
-
-            ######################### save depth restoration train metrics #####################
-            self.save_iter_depth_restoration_metrics(syn_ds, outputs_depth, ins_masks, mode='val')
-            
-            if self.val_data_type == 'real':
-                pred_xyzs = depth_to_xyz(outputs_depth, self.fx_real_input, self.fy_real_input, scale_h=outputs_depth.shape[2] / 720., scale_w=outputs_depth.shape[3] / 1280.)
-                label_xyzs = depth_to_xyz(syn_ds, self.fx_real_input, self.fy_real_input, scale_h=outputs_depth.shape[2] / 720., scale_w=outputs_depth.shape[3] / 1280.)
-            else:
-                pred_xyzs = depth_to_xyz(outputs_depth, self.fx_sim, self.fy_sim, scale_h=outputs_depth.shape[2] / 360., scale_w=outputs_depth.shape[3] / 640.)
-                label_xyzs = depth_to_xyz(syn_ds, self.fx_sim, self.fy_sim, scale_h=outputs_depth.shape[2] / 360., scale_w=outputs_depth.shape[3] / 640.)
-    
-            rgb = (rgbs[0].permute(1, 2, 0) * 255).trunc()
-
-            mask = ins_masks[0].squeeze()
-            mask_save = copy.deepcopy(rgb)
-            mask_save[:, :, 0] = mask * 255
-            mask_save[:, :, 1] = mask * 255
-            mask_save[:, :, 2] = mask * 255
-            mask_save = mask_save.cpu().numpy()
-            mask_save = cv2.resize(mask_save, (224, 126))
-            cv2.imwrite(os.path.join(self.output_path, str(i)+'_ins_mask.png'), mask_save)
-                        
-            rgb_save = rgb
-            rgb_save[:, :, 0] = rgb[:, :, 2]
-            rgb_save[:, :, 1] = rgb[:, :, 1]
-            rgb_save[:, :, 2] = rgb[:, :, 0]
-            rgb_save = rgb_save.cpu().numpy()
-            rgb_save = cv2.resize(rgb_save, (224, 126))
-            cv2.imwrite(os.path.join(self.output_path, str(i)+'_rgb.png'), rgb_save)
-            rgb = rgb.reshape(rgb.shape[0] * rgb.shape[1], rgb.shape[2])
-            
-            sim_xyz = sim_xyzs[0].permute(1, 2, 0)
-            sim_xyz = sim_xyz.reshape(sim_xyz.shape[0] * sim_xyz.shape[1], sim_xyz.shape[2])
-            sim_xyz = torch.cat((sim_xyz, rgb), 1)
-            sim_xyz = sim_xyz.cpu().numpy()
-            
-            pred_xyz = pred_xyzs[0].permute(1, 2, 0)
-            pred_xyz = pred_xyz.reshape(pred_xyz.shape[0] * pred_xyz.shape[1], pred_xyz.shape[2])
-            pred_xyz = torch.cat((pred_xyz, rgb), 1)
-            pred_xyz = pred_xyz.cpu().numpy()
-    
-            label_xyz = label_xyzs[0].permute(1, 2, 0)
-            label_xyz = label_xyz.reshape(label_xyz.shape[0] * label_xyz.shape[1], label_xyz.shape[2])
-            label_xyz = torch.cat((label_xyz, rgb), 1)
-            label_xyz = label_xyz.cpu().numpy() 
-            
-            if not os.path.exists(self.output_path):
-                os.makedirs(self.output_path)
-                
-            np.savetxt(os.path.join(self.output_path, str(i)+'_input.txt'), sim_xyz)       
-            np.savetxt(os.path.join(self.output_path, str(i)+'_pred.txt'), pred_xyz)       
-            np.savetxt(os.path.join(self.output_path, str(i)+'_label.txt'), label_xyz)       
-
-            # self.save_iter_sem_seg_metrics(sem_masks, pred_sem_seg, mode='val')
-            # self.save_iter_coord_metrics(mode='val')
-
-        self.save_epoch_depth_restoration_metrics(mode='inference')
-        # self.save_epoch_sem_seg_metrics()
-        # self.save_epoch_coord_metrics()
-    '''
 
     def inference(self):
         #################################### VALIDATION CYCLE ###################################
@@ -1147,7 +1062,7 @@ class SwinDRNetTrainer():
         print('\nValidation:')
         print('=' * 10)
         self.pose_fitting_result = []
-        print('self.val_loader',len(self.val_loader))
+        #print('self.val_loader',len(self.val_loader))
         for i, batch in enumerate(tqdm(self.val_loader)):
             self.model.eval()
             sample_batched = self.transfer_to_device(batch)
@@ -1155,66 +1070,7 @@ class SwinDRNetTrainer():
                 # outputs_depth, normal_labels, normal_pred, confidence_sim_ds, confidence_initial, \
                 #     pred_sem_seg, pred_coord = self.forward(cache, mode='val')
                 output_sem_seg, output_coords = self.forward(sample_batched, mode='val')
-            
-            rgbs = sample_batched['rgb']
-            sim_xyzs = sample_batched['sim_xyz']
-            sim_ds = sample_batched['sim_depth']
-            outputs_depth = sample_batched['output_depth']
-            syn_ds = sample_batched['syn_depth']
-            coords = sample_batched['nocs_map']
-            sem_masks = sample_batched['sem_mask']
-            ins_masks = sample_batched['ins_mask']
-            ins_without_other_masks = sample_batched['ins_w/o_others_mask']
-            print(outputs_depth.shape)
-            if self.val_data_type == 'real':
-                pred_xyzs = depth_to_xyz(outputs_depth, self.fx_real_input, self.fy_real_input, scale_h=outputs_depth.shape[2] / 720., scale_w=outputs_depth.shape[3] / 1280.)
-                label_xyzs = depth_to_xyz(syn_ds, self.fx_real_input, self.fy_real_input, scale_h=outputs_depth.shape[2] / 720., scale_w=outputs_depth.shape[3] / 1280.)
-            else:
-                pred_xyzs = depth_to_xyz(outputs_depth, self.fx_sim, self.fy_sim, scale_h=outputs_depth.shape[2] / 360., scale_w=outputs_depth.shape[3] / 640.)
-                label_xyzs = depth_to_xyz(syn_ds, self.fx_sim, self.fy_sim, scale_h=outputs_depth.shape[2] / 360., scale_w=outputs_depth.shape[3] / 640.)
-            '''
-            rgb = (rgbs[0].permute(1, 2, 0) * 255).trunc()
 
-            mask = ins_masks[0].squeeze()
-            mask_save = copy.deepcopy(rgb)
-            mask_save[:, :, 0] = mask * 255
-            mask_save[:, :, 1] = mask * 255
-            mask_save[:, :, 2] = mask * 255
-            mask_save = mask_save.cpu().numpy()
-            mask_save = cv2.resize(mask_save, (224, 126))
-            cv2.imwrite(os.path.join(self.output_path, str(i)+'_ins_mask.png'), mask_save)
-                        
-            rgb_save = rgb
-            rgb_save[:, :, 0] = rgb[:, :, 2]
-            rgb_save[:, :, 1] = rgb[:, :, 1]
-            rgb_save[:, :, 2] = rgb[:, :, 0]
-            rgb_save = rgb_save.cpu().numpy()
-            rgb_save = cv2.resize(rgb_save, (224, 126))
-            cv2.imwrite(os.path.join(self.output_path, str(i)+'_rgb.png'), rgb_save)
-            rgb = rgb.reshape(rgb.shape[0] * rgb.shape[1], rgb.shape[2])
-
-            sim_xyz = sim_xyzs[0].permute(1, 2, 0)
-            sim_xyz = sim_xyz.reshape(sim_xyz.shape[0] * sim_xyz.shape[1], sim_xyz.shape[2])
-            #sim_xyz = torch.cat((sim_xyz, rgb), 1)
-            sim_xyz = sim_xyz.cpu().numpy()
-
-            pred_xyz = pred_xyzs[0].permute(1, 2, 0)
-            pred_xyz = pred_xyz.reshape(pred_xyz.shape[0] * pred_xyz.shape[1], pred_xyz.shape[2])
-            #pred_xyz = torch.cat((pred_xyz, rgb), 1)
-            pred_xyz = pred_xyz.cpu().numpy()
-    
-            label_xyz = label_xyzs[0].permute(1, 2, 0)
-            label_xyz = label_xyz.reshape(label_xyz.shape[0] * label_xyz.shape[1], label_xyz.shape[2])
-            #label_xyz = torch.cat((label_xyz, rgb), 1)
-            label_xyz = label_xyz.cpu().numpy() 
-            
-            if not os.path.exists(self.output_path):
-                os.makedirs(self.output_path)
-                
-            np.savetxt(os.path.join(self.output_path, str(i)+'_input.txt'), sim_xyz)       
-            np.savetxt(os.path.join(self.output_path, str(i)+'_pred.txt'), pred_xyz)       
-            np.savetxt(os.path.join(self.output_path, str(i)+'_label.txt'), label_xyz)       
-            '''
             
             self.inference_iter_coord_metrics(self.transfer_to_cpu(batch), output_sem_seg.detach().cpu(), output_coords.detach().cpu(),mode='val')
 
@@ -1342,7 +1198,7 @@ class SwinDRNetTrainer():
                                                         gt_coords, 
                                                         resize_syn_ds, 
                                                         intrinsics, 
-                                                        synset_names,save_path='tmp/gts/')
+                                                        synset_names)
 
             result['pred_class_ids'] = pred_class_ids
             result['pred_bboxes'] = pred_boxes
@@ -1354,25 +1210,14 @@ class SwinDRNetTrainer():
                                                                                         resize_output_ds, 
                                                                                         intrinsics, 
                                                                                         synset_names, 
-                                                                                        if_norm=True,save_path='tmp/pred/')
+                                                                                        if_norm=True)
             
 
             
             
             self.pose_fitting_result.append(result)
             
-            if 1:
-                draw_rgb = False
-                save_dir =os.path.join(self.output_path ,'save_{}'.format(i))
-                if not os.path.exists(save_dir) :
-                    os.mkdir(save_dir)
-                data = 'camera'
-                result['gt_handle_visibility'] = np.ones_like(gt_class_ids)
 
-                draw_detections(resize_rgbs, save_dir, data, 1, intrinsics, synset_names, draw_rgb,
-                                        gt_boxes, gt_class_ids, gt_masks, gt_coords, result['gt_RTs'], result['gt_scales'], result['gt_handle_visibility'],
-                                        pred_boxes, pred_class_ids, pred_masks, pred_coords, result['pred_RTs'], pred_scores, result['pred_scales'])
-            exit(0)
     
     def inference_epoch_coord_metrics(self,mode):
         synset_names = ['other',  # 0

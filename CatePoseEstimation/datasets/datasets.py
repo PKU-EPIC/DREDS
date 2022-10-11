@@ -341,6 +341,10 @@ class SwinDRNetDataset(Dataset):
             _syn_depth = det_tf_only_resize.augment_image(_syn_depth, hooks=ia.HooksImages(activator=self._activator_masks))
             _syn_depth = _syn_depth.transpose((2, 0, 1))  # To Shape: (1, H, W)
 
+            _output_depth = _output_depth.transpose((1, 2, 0))  # To Shape: (H, W, 1)
+            _output_depth = det_tf_only_resize.augment_image(_output_depth, hooks=ia.HooksImages(activator=self._activator_masks))
+            _output_depth = _output_depth.transpose((2, 0, 1))  # To Shape: (1, H, W)
+
             _nocs = det_tf_only_resize.augment_image(_nocs, hooks=ia.HooksImages(activator=self._activator_masks))
             _nocs = _nocs.transpose((2, 0, 1))
             _mask = det_tf_only_resize.augment_image(_mask, hooks=ia.HooksImages(activator=self._activator_masks))
@@ -351,7 +355,7 @@ class SwinDRNetDataset(Dataset):
         _sim_depth_tensor = transforms.ToTensor()(_sim_depth)
         _syn_depth_tensor = torch.from_numpy(_syn_depth)
         _nocs_tensor = torch.from_numpy(_nocs)
-        
+        _output_depth_tensor = torch.from_numpy(_output_depth)
 
         if mask_path.split('.')[-1] == 'exr':
             _mask = np.array(_mask * 255, dtype=np.int32)        
@@ -409,7 +413,7 @@ class SwinDRNetDataset(Dataset):
         sample = {'rgb': _rgb_tensor,
                   'sim_xyz': _sim_xyz_tensor,
                   'sim_depth': _sim_depth_tensor,
-                  'output_depth': _output_depth,
+                  'output_depth': _output_depth_tensor,
                   'syn_depth': _syn_depth_tensor,
                   'nocs_map': _nocs_tensor,
                   'sem_mask': _mask_sem_tensor,
