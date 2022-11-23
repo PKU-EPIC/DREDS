@@ -81,3 +81,6 @@ data
     # An example command for testing
     $ python inference.py --val_data_type TYPE_OF_DATA --train_data_path PATH_DRED_CatKnown_TrainSplit --val_data_path PATH_DRED_CatKnown_TestSplit  --val_obj_path PATH_DRED_CatKnown_CADMOEL --val_depth_path PATH_VAL_DEPTH
     ```
+	
+## Note
+We has fixed a bug of calculating IoUs in the [original NOCS code](https://github.com/hughw19/NOCS_CVPR2019/blob/78a31c2026a954add1a2711286ff45ce1603b8ab/utils.py#L252), and re-evaluated the related results. Our conclusions in the paper still hold. Thanks [Liu et al.](https://github.com/THU-DA-6D-Pose-Group/CATRE#note) for their confirmation.
