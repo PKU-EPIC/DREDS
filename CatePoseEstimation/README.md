@@ -83,4 +83,4 @@ data
     ```
 	
 ## Note
-We has fixed a bug of calculating IoUs in the [original NOCS code](https://github.com/hughw19/NOCS_CVPR2019/blob/78a31c2026a954add1a2711286ff45ce1603b8ab/utils.py#L252), and re-evaluated the related results. Our conclusions in the paper still hold. Thanks [Liu et al.](https://github.com/THU-DA-6D-Pose-Group/CATRE#note) for their confirmation.
+We has fixed a bug of calculating IoUs in the [original NOCS code](https://github.com/hughw19/NOCS_CVPR2019/blob/78a31c2026a954add1a2711286ff45ce1603b8ab/utils.py#L252), as shown in [here](https://github.com/PKU-EPIC/DREDS/blob/310a4921d8cf5a565d6c2547d98070db0e59c999/CatePoseEstimation/utils/metrics_nocs.py#L234), and re-evaluated the related results. The modification does not affect our conclusions in the paper. Thanks [Liu et al.](https://github.com/THU-DA-6D-Pose-Group/CATRE#note) for their confirmation.
