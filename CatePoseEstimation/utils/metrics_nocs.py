@@ -171,10 +171,10 @@ def compute_3d_iou(bbox_3d_1, bbox_3d_2, handle_visibility, class_name_1, class_
     '''
     # flatten masks
     def asymmetric_3d_iou(bbox_3d_1, bbox_3d_2):
-        bbox_1_max = np.amax(bbox_3d_1, axis=0)
-        bbox_1_min = np.amin(bbox_3d_1, axis=0)
-        bbox_2_max = np.amax(bbox_3d_2, axis=0)
-        bbox_2_min = np.amin(bbox_3d_2, axis=0)
+        bbox_1_max = np.amax(bbox_3d_1, axis=1)
+        bbox_1_min = np.amin(bbox_3d_1, axis=1)
+        bbox_2_max = np.amax(bbox_3d_2, axis=1)
+        bbox_2_min = np.amin(bbox_3d_2, axis=1)
 
         overlap_min = np.maximum(bbox_1_min, bbox_2_min)
         overlap_max = np.minimum(bbox_1_max, bbox_2_max)
@@ -231,10 +231,10 @@ def compute_3d_iou_new(RT_1, RT_2, scales_1, scales_2, handle_visibility, class_
         bbox_3d_2 = transform_coordinates_3d(noc_cube_2, RT_2)
 
 
-        bbox_1_max = np.amax(bbox_3d_1, axis=0)
-        bbox_1_min = np.amin(bbox_3d_1, axis=0)
-        bbox_2_max = np.amax(bbox_3d_2, axis=0)
-        bbox_2_min = np.amin(bbox_3d_2, axis=0)
+        bbox_1_max = np.amax(bbox_3d_1, axis=1)
+        bbox_1_min = np.amin(bbox_3d_1, axis=1)
+        bbox_2_max = np.amax(bbox_3d_2, axis=1)
+        bbox_2_min = np.amin(bbox_3d_2, axis=1)
 
         overlap_min = np.maximum(bbox_1_min, bbox_2_min)
         overlap_max = np.minimum(bbox_1_max, bbox_2_max)
